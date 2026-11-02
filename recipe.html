@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Recipes — RecipeHub</title>
+  <meta name="description" content="Search recipes, match them to your ingredients, save favourites and cook step by step.">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body class="page-explore">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="logo" href="index.html" aria-label="RecipeHub home">
+        <span class="logo-mark" aria-hidden="true">R</span>
+        <span>Recipe<span class="accent-text">Hub</span></span>
+      </a>
+      <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="primary-nav" class="primary-nav" aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="recipe.html">Explore Recipes</a></li>
+          <li><a href="recipe.html#categories">Categories</a></li>
+          <li><a href="recipe.html#ingredient-finder">Ingredient Finder</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="recipe.html#favourites">Favourites <span class="fav-count" data-fav-count>0</span></a></li>
+        </ul>
+        <div class="nav-actions">
+          <button type="button" class="icon-btn" id="theme-toggle" aria-pressed="false" aria-label="Switch to dark mode"><span class="theme-icon" aria-hidden="true">☾</span></button>
+          <a href="recipe.html" class="btn btn-primary">Explore Now</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <div class="container page-head">
+      <p class="eyebrow">EXPLORE RECIPES</p>
+      <h1>What shall we cook today?</h1>
+      <p>Search by recipe, ingredient, cuisine or category, then open a recipe to scale servings, cook step by step or print it.</p>
+    </div>
+
+    <!-- Search, categories and results -->
+    <section class="container" id="categories" aria-labelledby="browse-title">
+      <h2 class="visually-hidden" id="browse-title">Browse recipes</h2>
+      <div class="toolbar">
+        <div class="toolbar-search">
+          <form id="search-form" class="search-bar" role="search">
+            <label for="search-input" class="visually-hidden">Search recipes</label>
+            <input type="search" id="search-input" placeholder="Search recipes, ingredients, cuisines…" autocomplete="off" maxlength="100">
+            <button type="submit" class="btn btn-primary" id="search-button">Search</button>
+          </form>
+          <button type="button" class="clear-search" id="clear-search" hidden>Clear search</button>
+        </div>
+
+        <div class="pill-row" id="category-filters" role="group" aria-label="Recipe categories">
+          <button type="button" class="pill active" data-category="All Recipes" aria-pressed="true">All Recipes</button>
+          <button type="button" class="pill" data-category="Breakfast" aria-pressed="false">Breakfast</button>
+          <button type="button" class="pill" data-category="Lunch" aria-pressed="false">Lunch</button>
+          <button type="button" class="pill" data-category="Dinner" aria-pressed="false">Dinner</button>
+          <button type="button" class="pill" data-category="Snacks" aria-pressed="false">Snacks</button>
+          <button type="button" class="pill" data-category="Desserts" aria-pressed="false">Desserts</button>
+        </div>
+
+        <div class="toolbar-selects">
+          <div class="field">
+            <label for="sort-select">Sort by</label>
+            <select id="sort-select">
+              <option value="default">Default order</option>
+              <option value="alphabetical">Alphabetical (A–Z)</option>
+              <option value="time">Shortest cooking time</option>
+              <option value="rating">Highest average rating</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="diet-filter">Dietary</label>
+            <select id="diet-filter">
+              <option value="">Any diet</option>
+              <option value="vegetarian">Vegetarian</option>
+              <option value="vegan">Vegan</option>
+              <option value="gluten-free">Gluten-free</option>
+              <option value="dairy-free">Dairy-free</option>
+              <option value="egg-free">Egg-free</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <p class="results-count" id="results-count" aria-live="polite"></p>
+      <div class="card-grid" id="recipe-grid"></div>
+      <noscript><p>Please enable JavaScript to browse the recipes.</p></noscript>
+
+      <div class="empty-state" id="no-results" hidden>
+        <h3>No recipes found</h3>
+        <p id="no-results-text">No recipes match your search.</p>
+        <button type="button" class="btn btn-primary" id="reset-filters">Reset all filters</button>
+      </div>
+    </section>
+
+    <!-- Smart Ingredient Finder -->
+    <section class="section" id="ingredient-finder" aria-labelledby="finder-title">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 id="finder-title">Smart Ingredient Finder</h2>
+            <p>Add the ingredients you have and we will rank recipes by how well they match.</p>
+          </div>
+        </div>
+        <div class="finder-panel">
+          <form id="ingredient-form" class="finder-form">
+            <label for="ingredient-input" class="visually-hidden">Add an ingredient</label>
+            <input type="text" id="ingredient-input" placeholder="e.g. potatoes, capsicum, curd" autocomplete="off" maxlength="40">
+            <button type="submit" class="btn btn-primary" id="add-ingredient">Add</button>
+          </form>
+
+          <p class="finder-label" id="quick-add-label">Quick add</p>
+          <div class="pill-row" id="quick-add" role="group" aria-labelledby="quick-add-label"></div>
+
+          <p class="finder-label" id="selected-label">Your ingredients</p>
+          <ul class="chip-list" id="selected-ingredients" aria-labelledby="selected-label"></ul>
+
+          <div class="finder-actions">
+            <button type="button" class="btn btn-primary" id="find-recipes">Find My Recipes</button>
+            <button type="button" class="btn btn-ghost" id="clear-ingredients">Clear All</button>
+            <label class="checkbox-label" for="strict-match">
+              <input type="checkbox" id="strict-match">
+              Strict matching (only recipes I can fully make)
+            </label>
+          </div>
+          <p class="finder-message" id="finder-message" role="status" aria-live="polite"></p>
+          <p class="finder-note">Basic staples such as salt, pepper and water are assumed to be in your kitchen.</p>
+        </div>
+
+        <div class="finder-results" id="finder-results-section" hidden>
+          <div class="section-head">
+            <h3 id="finder-summary" aria-live="polite">Matching recipes</h3>
+            <button type="button" class="btn btn-secondary btn-sm" id="start-again">Start Again</button>
+          </div>
+          <div class="card-grid" id="finder-results"></div>
+          <div class="empty-state" id="finder-empty" hidden>
+            <h3>No recipes match yet</h3>
+            <p>Try adding more ingredients such as onion, oil, flour or butter, swap in a different ingredient, or turn off strict matching to see partial matches.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Favourites -->
+    <section class="section section-alt" id="favourites" aria-labelledby="favourites-title">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 id="favourites-title">Your Favourites</h2>
+            <p>Recipes you have saved with the heart button.</p>
+          </div>
+        </div>
+        <div class="card-grid" id="favourites-grid"></div>
+        <div class="empty-state" id="favourites-empty">
+          <h3>No favourites yet</h3>
+          <p>Tap the heart on any recipe to save it here for later.</p>
+          <a href="#categories" class="btn btn-primary">Browse recipes</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recently viewed -->
+    <section class="section" id="recently-viewed" aria-labelledby="recent-title">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 id="recent-title">Recently Viewed</h2>
+            <p>Pick up where you left off.</p>
+          </div>
+        </div>
+        <div class="card-grid" id="recent-grid"></div>
+        <div class="empty-state" id="recent-empty">
+          <h3>Nothing viewed yet</h3>
+          <p>Recipes you open will appear here, newest first.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Shopping list and timer -->
+    <section class="section section-alt" id="kitchen-tools" aria-labelledby="tools-title">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 id="tools-title">Kitchen Tools</h2>
+            <p>Your shopping list and a simple cooking timer.</p>
+          </div>
+        </div>
+        <div class="tools-grid">
+          <div class="panel" id="shopping">
+            <div class="panel-head">
+              <h3>Shopping List</h3>
+              <div class="panel-actions">
+                <button type="button" class="btn btn-ghost btn-sm" id="clear-purchased">Clear purchased</button>
+                <button type="button" class="btn btn-ghost btn-sm" id="clear-list">Clear list</button>
+              </div>
+            </div>
+            <p class="shopping-summary" id="shopping-summary" aria-live="polite"></p>
+            <ul class="shopping-list" id="shopping-list"></ul>
+            <div class="empty-state" id="shopping-empty">
+              <h3>Your list is empty</h3>
+              <p>Open a recipe and choose “Add to shopping list” to collect its ingredients here.</p>
+            </div>
+          </div>
+
+          <div class="panel" id="timer-panel">
+            <h3>Cooking Timer</h3>
+            <form id="timer-form" class="timer-form">
+              <div class="timer-inputs">
+                <div class="field">
+                  <label for="timer-minutes">Minutes</label>
+                  <input type="number" id="timer-minutes" min="0" max="99" value="10" inputmode="numeric">
+                </div>
+                <div class="field">
+                  <label for="timer-seconds">Seconds</label>
+                  <input type="number" id="timer-seconds" min="0" max="59" value="0" inputmode="numeric">
+                </div>
+              </div>
+              <p class="timer-display" id="timer-display" data-timer-display role="timer">10:00</p>
+              <div class="timer-buttons">
+                <button type="submit" class="btn btn-primary btn-sm" id="timer-start">Start</button>
+                <button type="button" class="btn btn-ghost btn-sm" id="timer-pause">Pause</button>
+                <button type="button" class="btn btn-ghost btn-sm" id="timer-resume">Resume</button>
+                <button type="button" class="btn btn-ghost btn-sm" id="timer-reset">Reset</button>
+              </div>
+              <p class="timer-message" id="timer-message" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="logo" href="index.html" aria-label="RecipeHub home">
+            <span class="logo-mark" aria-hidden="true">R</span>
+            <span>Recipe<span class="accent-text">Hub</span></span>
+          </a>
+          <p>Simple recipes and smart ideas for everyday cooking.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="recipe.html">Explore Recipes</a></li>
+            <li><a href="about.html">About</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="copyright">© 2026 RecipeHub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Recipe details modal (filled by script.js) -->
+  <div class="modal-backdrop" id="modal-backdrop" hidden>
+    <div class="modal" id="recipe-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
+      <button type="button" class="modal-close" id="modal-close" aria-label="Close recipe details">×</button>
+      <div class="modal-scroll" id="modal-scroll">
+        <img class="modal-image" id="modal-image" src="" alt="" width="860" height="340">
+        <div class="modal-content">
+          <p class="eyebrow" id="modal-cuisine"></p>
+          <h2 id="modal-title"></h2>
+          <p id="modal-desc"></p>
+          <ul class="meta-list" id="modal-meta"></ul>
+          <ul class="tag-list" id="modal-tags" aria-label="Dietary information"></ul>
+
+          <div class="modal-actions no-print">
+            <button type="button" class="fav-btn fav-btn-text" id="modal-fav" data-recipe-id="">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.2 2.8 4.5 6.4 4.5c2 0 3.7 1.1 4.6 2.7h2c.9-1.6 2.6-2.7 4.6-2.7 3.6 0 5.5 3.7 4 7.2C19.5 16.4 12 21 12 21z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+              <span class="fav-label">Save to favourites</span>
+            </button>
+            <div class="rating" id="modal-rating" data-recipe-id=""></div>
+          </div>
+          <div class="modal-actions no-print">
+            <button type="button" class="btn btn-primary btn-sm" id="modal-cook">Start cooking mode</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="modal-shopping">Add to shopping list</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="modal-print">Print recipe</button>
+          </div>
+
+          <div class="modal-columns">
+            <section aria-labelledby="ingredients-heading">
+              <h3 id="ingredients-heading">Ingredients</h3>
+              <div class="servings no-print">
+                <span id="servings-label">Servings</span>
+                <div class="servings-control" role="group" aria-labelledby="servings-label">
+                  <button type="button" class="icon-btn small" id="servings-minus" aria-label="Decrease servings">−</button>
+                  <span class="servings-value" id="servings-value" aria-live="polite">1</span>
+                  <button type="button" class="icon-btn small" id="servings-plus" aria-label="Increase servings">+</button>
+                </div>
+              </div>
+              <ul class="ingredient-list" id="modal-ingredients"></ul>
+            </section>
+            <section aria-labelledby="steps-heading">
+              <h3 id="steps-heading">Instructions</h3>
+              <ol class="steps-list" id="modal-steps"></ol>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cooking mode (full-screen, one step at a time) -->
+  <div class="cooking-overlay" id="cooking-mode" role="dialog" aria-modal="true" aria-labelledby="cooking-title" tabindex="-1" hidden>
+    <div class="cooking-card">
+      <div class="cooking-top">
+        <div>
+          <p class="eyebrow">Cooking mode</p>
+          <h2 id="cooking-title"></h2>
+        </div>
+        <button type="button" class="btn btn-ghost btn-sm" id="cooking-exit">Exit cooking mode</button>
+      </div>
+      <progress class="cooking-progress" id="cooking-progress" max="1" value="0" aria-label="Cooking progress"></progress>
+      <div id="cooking-step-view">
+        <p class="cooking-step-label" id="cooking-step-label" aria-live="polite"></p>
+        <p class="cooking-instruction" id="cooking-instruction"></p>
+      </div>
+      <div class="cooking-complete" id="cooking-complete" hidden>
+        <h3>All done — enjoy your meal!</h3>
+        <p class="muted">You have completed every step. Nice cooking.</p>
+      </div>
+      <p class="cooking-timer-chip" id="cooking-timer-chip" hidden>Timer: <span data-timer-display>00:00</span></p>
+      <div class="cooking-nav">
+        <button type="button" class="btn btn-ghost" id="cooking-prev">Previous</button>
+        <button type="button" class="btn btn-primary" id="cooking-next">Next</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

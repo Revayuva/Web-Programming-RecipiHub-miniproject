@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — RecipeHub</title>
+  <meta name="description" content="Learn about RecipeHub, a smart recipe discovery website.">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body class="page-about">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="logo" href="index.html" aria-label="RecipeHub home">
+        <span class="logo-mark" aria-hidden="true">R</span>
+        <span>Recipe<span class="accent-text">Hub</span></span>
+      </a>
+      <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="primary-nav" class="primary-nav" aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="recipe.html">Explore Recipes</a></li>
+          <li><a href="recipe.html#categories">Categories</a></li>
+          <li><a href="recipe.html#ingredient-finder">Ingredient Finder</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="recipe.html#favourites">Favourites <span class="fav-count" data-fav-count>0</span></a></li>
+        </ul>
+        <div class="nav-actions">
+          <button type="button" class="icon-btn" id="theme-toggle" aria-pressed="false" aria-label="Switch to dark mode"><span class="theme-icon" aria-hidden="true">☾</span></button>
+          <a href="recipe.html" class="btn btn-primary">Explore Now</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="about-hero container" aria-labelledby="about-title">
+      <div>
+        <p class="eyebrow">ABOUT RECIPEHUB</p>
+        <h1 id="about-title">Good food brings people together.</h1>
+        <p class="lead">RecipeHub is a smart recipe discovery website built to make everyday cooking simpler and more enjoyable. Browse recipes by category, search by name or ingredient, save your favourites and cook along step by step.</p>
+        <p class="muted">Everything you save, such as favourites, ratings and your shopping list, stays in your own browser. There are no accounts and nothing is sent to a server.</p>
+      </div>
+      <figure>
+        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&amp;fit=crop&amp;w=1100&amp;q=75" alt="A bright home kitchen with fresh ingredients on the counter" width="1100" height="930">
+      </figure>
+    </section>
+
+    <section class="section section-alt" aria-labelledby="features-title">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 id="features-title">What you can do</h2>
+            <p>Three ideas that keep cooking easy.</p>
+          </div>
+        </div>
+        <div class="feature-grid">
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true">1</div>
+            <h3>Discover Recipes</h3>
+            <p>Explore dishes for breakfast, lunch, dinner, snacks and desserts. Search instantly, sort by time or rating, and open any recipe for ingredients and clear steps.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true">2</div>
+            <h3>Smart Ingredient Finder</h3>
+            <p>Add what is in your kitchen and see which recipes match best. Use strict matching to see only the dishes you can make with exactly what you have.</p>
+          </article>
+          <article class="feature">
+            <div class="feature-icon" aria-hidden="true">3</div>
+            <h3>Rate Your Recipes</h3>
+            <p>Give every recipe one to five stars and change your mind whenever you like. Ratings are saved in this browser, so they are yours alone.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container" aria-labelledby="cta-title">
+      <div class="cta-band">
+        <h2 id="cta-title">Ready to cook something delicious?</h2>
+        <p>Pick a recipe, scale the servings, and follow along in cooking mode.</p>
+        <a href="recipe.html" class="btn btn-primary">Explore Recipes</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="logo" href="index.html" aria-label="RecipeHub home">
+            <span class="logo-mark" aria-hidden="true">R</span>
+            <span>Recipe<span class="accent-text">Hub</span></span>
+          </a>
+          <p>Simple recipes and smart ideas for everyday cooking.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="recipe.html">Explore Recipes</a></li>
+            <li><a href="about.html">About</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="copyright">© 2026 RecipeHub. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

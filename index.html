@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RecipeHub — Smart Recipe Discovery</title>
+  <meta name="description" content="RecipeHub helps you discover recipes, match them to the ingredients you have, and cook with confidence.">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body class="page-home">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="logo" href="index.html" aria-label="RecipeHub home">
+        <span class="logo-mark" aria-hidden="true">R</span>
+        <span>Recipe<span class="accent-text">Hub</span></span>
+      </a>
+      <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="primary-nav" class="primary-nav" aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="recipe.html">Explore Recipes</a></li>
+          <li><a href="recipe.html#categories">Categories</a></li>
+          <li><a href="recipe.html#ingredient-finder">Ingredient Finder</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="recipe.html#favourites">Favourites <span class="fav-count" data-fav-count>0</span></a></li>
+        </ul>
+        <div class="nav-actions">
+          <button type="button" class="icon-btn" id="theme-toggle" aria-pressed="false" aria-label="Switch to dark mode"><span class="theme-icon" aria-hidden="true">☾</span></button>
+          <a href="recipe.html" class="btn btn-primary">Explore Now</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="hero container" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">YOUR DAILY DOSE OF DELICIOUS</p>
+        <h1 id="hero-title">Good food. <span class="accent">Good mood.</span></h1>
+        <p class="lead">RecipeHub is your friendly kitchen companion. Discover simple, tasty recipes, find dishes that fit the ingredients you already have, and cook step by step.</p>
+
+        <form id="home-search-form" class="search-bar" role="search">
+          <label for="home-search-input" class="visually-hidden">Search for a recipe or ingredient</label>
+          <input type="search" id="home-search-input" name="q" placeholder="Search a recipe or ingredient…" autocomplete="off" maxlength="100">
+          <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+
+        <div class="hero-actions">
+          <a href="recipe.html" class="btn btn-secondary">Explore Recipes</a>
+          <p class="tagline">Cook something you love today.</p>
+        </div>
+      </div>
+
+      <figure class="hero-figure">
+        <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&amp;fit=crop&amp;w=1100&amp;q=75" alt="A plate of creamy pasta with fresh vegetables" width="1100" height="1210">
+        <figcaption class="image-label">
+          <strong>Creamy Garden Pasta</strong>
+          <span>Italian · Ready in 30 min</span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="section section-alt" id="featured" aria-labelledby="featured-title">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 id="featured-title">Featured Recipes</h2>
+            <p>Hand-picked favourites to get you started.</p>
+          </div>
+          <a href="recipe.html" class="btn btn-ghost btn-sm">View all recipes</a>
+        </div>
+        <div class="card-grid" id="featured-grid"></div>
+        <noscript><p>Please enable JavaScript to see the recipes.</p></noscript>
+      </div>
+    </section>
+
+    <section class="section" id="quick" aria-labelledby="quick-title">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 id="quick-title">Quick Recipes</h2>
+            <p>Our fastest dishes, from the shortest total time.</p>
+          </div>
+        </div>
+        <div class="card-grid" id="quick-grid"></div>
+      </div>
+    </section>
+
+    <section class="container" aria-labelledby="promo-title">
+      <div class="promo">
+        <div>
+          <h2 id="promo-title">Got ingredients? Let us find the recipe.</h2>
+          <p>Tell RecipeHub what is in your kitchen and see which dishes you can make right now.</p>
+        </div>
+        <a href="recipe.html#ingredient-finder" class="btn">Try the Ingredient Finder</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="logo" href="index.html" aria-label="RecipeHub home">
+            <span class="logo-mark" aria-hidden="true">R</span>
+            <span>Recipe<span class="accent-text">Hub</span></span>
+          </a>
+          <p>Simple recipes and smart ideas for everyday cooking.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="recipe.html">Explore Recipes</a></li>
+            <li><a href="about.html">About</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="copyright">© 2026 RecipeHub. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
